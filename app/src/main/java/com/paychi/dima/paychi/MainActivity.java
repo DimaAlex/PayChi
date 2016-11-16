@@ -1,9 +1,11 @@
 package com.paychi.dima.paychi;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,5 +31,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return false;
+    }
+
+    public void authorization(View v) {
+        Intent intObj = new Intent(this, AuthorizationActivity.class);
+        startActivity(intObj);
     }
 }
