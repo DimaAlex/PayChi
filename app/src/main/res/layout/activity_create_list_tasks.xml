@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_create_task"
+    android:id="@+id/activity_create_list_tasks"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.paychi.dima.paychi.CreateTaskActivity"
+    tools:context="com.paychi.dima.paychi.CreateListTasksActivity"
     android:orientation="vertical">
 
     <EditText
         android:id="@+id/et_name"
-        android:hint="Заголовок"
+        android:hint="Название"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -28,16 +28,20 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_description">
         <RadioButton
-            android:id="@+id/rb_public"
+            android:id="@+id/rb_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Публичный" />
+            android:text="Все" />
         <RadioButton
-            android:id="@+id/rb_private"
+            android:id="@+id/rb_nobody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Приватный"/>
+            android:text="Никто"/>
+        <RadioButton
+            android:id="@+id/rb_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Выбрать"/>
     </RadioGroup>
 
     <LinearLayout
