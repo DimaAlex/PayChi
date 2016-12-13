@@ -37,4 +37,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intObj = new Intent(this, AuthorizationActivity.class);
         startActivity(intObj);
     }
+
+    public void tasksList(View v) {
+        Intent intObj = new Intent(this, ListTasksActivity.class);
+        startActivity(intObj);
+    }
 }
