@@ -31,6 +31,7 @@
             android:id="@+id/rb_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="Все" />
         <RadioButton
             android:id="@+id/rb_nobody"
@@ -56,6 +57,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="сreateListTasks"
             android:text="Создать">
         </Button>
     </LinearLayout>

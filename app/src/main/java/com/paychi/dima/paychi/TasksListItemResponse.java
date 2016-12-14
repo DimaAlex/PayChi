@@ -1,12 +1,12 @@
 package com.paychi.dima.paychi;
 
-import com.paychi.dima.paychi.models.TaskListWrapper;
+import com.paychi.dima.paychi.models.TaskList;
 
 import java.util.ArrayList;
 
-public class TaskListResponse {
+public class TasksListItemResponse {
     String result;
-    ArrayList<TaskListWrapper> data;
+    ArrayList<TaskList> data;
     int error_code; // 0 - success, another error message
     String error_message;
 }

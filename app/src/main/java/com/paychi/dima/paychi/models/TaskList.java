@@ -18,6 +18,13 @@ public class TaskList {
     @SerializedName("description")
     public String description;
 
+    public TaskList(String name, long userId, long visibility, String  desc) {
+        this.name = name;
+        this.userId = userId;
+        this.visibility = visibility;
+        this.description = desc;
+    }
+
     public String getName() {
         return name;
     }

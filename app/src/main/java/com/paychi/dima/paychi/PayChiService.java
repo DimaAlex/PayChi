@@ -25,6 +25,13 @@ public interface PayChiService {
         @Body TaskItem taskItem
     );
 
+    @POST("tasklist/create")
+    Call<TasksListItemResponse> createTaskList(
+        @Header(value = "token") String token,
+        @Header(value = "user_id") long userId,
+        @Body TaskList taskList
+    );
+
     @GET("tasklist/get") // список списков тасок глазами родителя
     Call<TaskListResponse> getTaskListChildren(
         @Header(value = "token") String token,

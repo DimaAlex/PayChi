@@ -1,7 +1,9 @@
 package com.paychi.dima.paychi;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -44,5 +46,10 @@ public class ListTasksActivity extends AppCompatActivity implements OnTaskListCl
     @Override
     public void onTaskListClick(TaskList list) {
         Toast.makeText(this, String.valueOf(list.listId), Toast.LENGTH_SHORT).show();
+    }
+
+    public void toCreateListTasksActivity(View v) {
+        Intent intObj = new Intent(this, CreateListTasksActivity.class);
+        startActivity(intObj);
     }
 }

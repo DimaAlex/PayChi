@@ -33,12 +33,12 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    public void authorization(View v) {
+    public void toAuthorizationActivity(View v) {
         Intent intObj = new Intent(this, AuthorizationActivity.class);
         startActivity(intObj);
     }
 
-    public void tasksList(View v) {
+    public void toListTasksActivity(View v) {
         Intent intObj = new Intent(this, ListTasksActivity.class);
         startActivity(intObj);
     }
