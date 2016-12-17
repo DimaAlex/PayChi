@@ -21,7 +21,7 @@ public interface PayChiService {
     @POST("user/registerVk/")
     Call<UserResponse> getUser(
         @Header(value = "token") String token,
-        @Header(value = "user_id") long userId,
+        @Header(value = "userId") long userId,
         @Query(value = "type") int type
     );
 
@@ -82,8 +82,8 @@ public interface PayChiService {
     Call<MessagesResponse> getNext(
             @Header(value = "token") String token,
             @Header(value = "user_id") long userId,
-            @Query(value = "message_id") long messageId,
-            @Path("dialog_id") long dialogId
+            @Path("dialog_id") long dialogId,
+            @Query(value = "message_id") long messageId
     );
 
     @POST("message/create")

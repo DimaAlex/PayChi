@@ -51,7 +51,7 @@ public class DialogsAdapter extends ArrayAdapter<Dialog> {
         holder.count.setText(""+getItem(position).getNot_readed());
         holder.count.setVisibility(getItem(position).getNot_readed() == 0 ? View.GONE : View.VISIBLE);
 
-        holder.many4.setText("+"+getItem(position).getCount());
+        holder.many4.setText(""+getItem(position).getCount());
         holder.name.setText(getItem(position).getName());
         holder.lastMessage.setText(getItem(position).getText());
 

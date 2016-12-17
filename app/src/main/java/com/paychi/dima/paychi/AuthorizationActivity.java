@@ -7,6 +7,7 @@ import android.support.v7.view.ActionMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
@@ -46,7 +47,11 @@ public class AuthorizationActivity extends AppCompatActivity {
                 callback.enqueue(new Callback<UserResponse>() {
                     @Override
                     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                        User currentUser = response.body().data;
+                        User currentUser;
+                        if (response.body().error_code == 0)
+                            currentUser = response.body().getData();
+                        else
+                            Toast.makeText(AuthorizationActivity.this, response.body().error_message, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

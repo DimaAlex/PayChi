@@ -7,4 +7,8 @@ public class UserResponse {
     User data;
     int error_code; // 0 - success, another error message
     String error_message;
+
+    public User getData() {
+        return data;
+    }
 }

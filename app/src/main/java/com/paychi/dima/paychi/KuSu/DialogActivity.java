@@ -24,6 +24,7 @@ import com.paychi.dima.paychi.R;
 import com.paychi.dima.paychi.RestApiClient;
 import com.paychi.dima.paychi.models.User;
 
+import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -64,14 +65,15 @@ public class DialogActivity extends Activity implements View.OnClickListener {
                     @Override
                     public void onResponse(Call<MessagesResponse> call, Response<MessagesResponse> response) {
                         progressBar.setVisibility(View.GONE);
-                        if (response.body() != null ){
-                            if (response.body().isSuccess()){
-                                adapter = new MessagesAdapter(DialogActivity.this, response.body().getData(), user);
+                        if (response.body() != null) {
+                            if (response.body().isSuccess()) {
+                                Collections.reverse(response.body().getData());
+                                adapter = new MessagesAdapter(DialogActivity.this, response.body().getData() , user);
                                 listView.setAdapter(adapter);
-                            }else{
+                            } else {
                                 Toast.makeText(DialogActivity.this, response.body().getErrorText(), Toast.LENGTH_SHORT).show();
                             }
-                        }else{
+                        } else {
                             Toast.makeText(DialogActivity.this, "Error", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -97,11 +99,12 @@ public class DialogActivity extends Activity implements View.OnClickListener {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        loadNext();
+                        if ((adapter != null)&&(adapter.getCount() > 0))
+                            loadNext();
                     }
                 });
             }
-        },100,3000);
+        }, 100, 3000);
     }
 
     @Override
@@ -112,7 +115,7 @@ public class DialogActivity extends Activity implements View.OnClickListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.add:
                 // TODO: 15.12.2016 добавить человека
                 break;
@@ -122,13 +125,13 @@ public class DialogActivity extends Activity implements View.OnClickListener {
                         .enqueue(new Callback<EmptyResponse>() {
                             @Override
                             public void onResponse(Call<EmptyResponse> call, Response<EmptyResponse> response) {
-                                if (response.body() != null ){
-                                    if (response.body().isSuccess()){
+                                if (response.body() != null) {
+                                    if (response.body().isSuccess()) {
                                         DialogActivity.this.finish();
-                                    }else{
+                                    } else {
                                         Toast.makeText(DialogActivity.this, response.body().getErrorText(), Toast.LENGTH_SHORT).show();
                                     }
-                                }else{
+                                } else {
                                     Toast.makeText(DialogActivity.this, "Error", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -144,24 +147,26 @@ public class DialogActivity extends Activity implements View.OnClickListener {
                         new Callback<UsersResponse>() {
                             @Override
                             public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-                                if (response.body() != null ){
-                                    if (response.body().isSuccess()){
+                                progressBar.setVisibility(View.GONE);
+                                if (response.body() != null) {
+                                    if (response.body().isSuccess()) {
                                         if (timer != null)
                                             timer.cancel();
                                         Intent intent = new Intent(DialogActivity.this, UserListActivity.class);
                                         intent.putExtra(Constants.TITLE_DATA, dialog.getName());
                                         intent.putExtra(Constants.USERS_DATA, response.body().getData());
                                         startActivityForResult(intent, Constants.USERS_ID_ACTIVITY);
-                                    }else{
+                                    } else {
                                         Toast.makeText(DialogActivity.this, response.body().getErrorText(), Toast.LENGTH_SHORT).show();
                                     }
-                                }else{
+                                } else {
                                     Toast.makeText(DialogActivity.this, "Error", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<UsersResponse> call, Throwable t) {
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(DialogActivity.this, "Error", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -173,9 +178,9 @@ public class DialogActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.send:
-                if (text.getText().toString().length()>0){
+                if (text.getText().toString().length() > 0) {
                     Message message = new Message();
                     message.setDialogId(dialog.getDialogId());
                     message.setText(text.getText().toString());
@@ -186,12 +191,12 @@ public class DialogActivity extends Activity implements View.OnClickListener {
                             .enqueue(new Callback<EmptyResponse>() {
                                 @Override
                                 public void onResponse(Call<EmptyResponse> call, Response<EmptyResponse> response) {
-                                    if (response.body() != null ){
-                                        if (response.body().isSuccess()){
-                                        }else{
+                                    if (response.body() != null) {
+                                        if (response.body().isSuccess()) {
+                                        } else {
                                             Toast.makeText(DialogActivity.this, response.body().getErrorText(), Toast.LENGTH_SHORT).show();
                                         }
-                                    }else{
+                                    } else {
                                         Toast.makeText(DialogActivity.this, "Error", Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -206,30 +211,30 @@ public class DialogActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    public void loadNext(){
+    public void loadNext() {
         RestApiClient.getInstance().getPayChiService().getNext(
-            user.getToken(), user.getUserId(), adapter.getLastId(), dialog.getDialogId()
+                user.getToken(), user.getUserId(), dialog.getDialogId(), adapter.getLastId()
         ).enqueue(
-            new Callback<MessagesResponse>() {
-                @Override
-                public void onResponse(Call<MessagesResponse> call, Response<MessagesResponse> response) {
-                    if (response.body() != null ){
-                        if (response.body().isSuccess()){
-                            adapter.addAll(response.body().getData());
-                            adapter.notifyDataSetChanged();
-                        }else{
-                            Toast.makeText(DialogActivity.this, response.body().getErrorText(), Toast.LENGTH_SHORT).show();
+                new Callback<MessagesResponse>() {
+                    @Override
+                    public void onResponse(Call<MessagesResponse> call, Response<MessagesResponse> response) {
+                        if (response.body() != null) {
+                            if (response.body().isSuccess()) {
+                                adapter.addAll(response.body().getData());
+                                adapter.notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(DialogActivity.this, response.body().getErrorText(), Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(DialogActivity.this, "Error", Toast.LENGTH_SHORT).show();
                         }
-                    }else{
+                    }
+
+                    @Override
+                    public void onFailure(Call<MessagesResponse> call, Throwable t) {
                         Toast.makeText(DialogActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     }
                 }
-
-                @Override
-                public void onFailure(Call<MessagesResponse> call, Throwable t) {
-                    Toast.makeText(DialogActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                }
-            }
         );
     }
 
