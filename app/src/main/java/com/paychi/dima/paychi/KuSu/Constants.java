@@ -1,9 +1,5 @@
 package com.paychi.dima.paychi.KuSu;
 
-/**
- * Created by KuSu on 15.12.2016.
- */
-
 public class Constants {
     public static final String USER_DATA = "user";
     public static final String DIALOG_DATA = "dialog";

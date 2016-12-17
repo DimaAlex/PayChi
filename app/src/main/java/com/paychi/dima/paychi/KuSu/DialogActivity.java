@@ -31,10 +31,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by KuSu on 15.12.2016.
- */
-
 public class DialogActivity extends Activity implements View.OnClickListener {
 
     User user;
@@ -49,7 +45,7 @@ public class DialogActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.a_dialogs);
+        setContentView(R.layout.a_dialog);
         user = (User) getIntent().getSerializableExtra(Constants.USER_DATA);
         dialog = (Dialog) getIntent().getSerializableExtra(Constants.DIALOG_DATA);
         if (user == null)
@@ -60,7 +56,7 @@ public class DialogActivity extends Activity implements View.OnClickListener {
 
         text = (EditText) findViewById(R.id.text);
         listView = (ListView) findViewById(R.id.list);
-        findViewById(R.id.sendButton).setOnClickListener(this);
+        findViewById(R.id.send).setOnClickListener(this);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         RestApiClient.getInstance().getPayChiService().getFirst(user.getToken(), user.getUserId(), dialog.getDialogId()).enqueue(
@@ -211,27 +207,29 @@ public class DialogActivity extends Activity implements View.OnClickListener {
     }
 
     public void loadNext(){
-        RestApiClient.getInstance().getPayChiService().getNext(user.getToken(), user.getUserId(), dialog.getDialogId(), adapter.getLastId()).enqueue(
-                new Callback<MessagesResponse>() {
-                    @Override
-                    public void onResponse(Call<MessagesResponse> call, Response<MessagesResponse> response) {
-                        if (response.body() != null ){
-                            if (response.body().isSuccess()){
-                                adapter.addAll(response.body().getData());
-                                adapter.notifyDataSetChanged();
-                            }else{
-                                Toast.makeText(DialogActivity.this, response.body().getErrorText(), Toast.LENGTH_SHORT).show();
-                            }
+        RestApiClient.getInstance().getPayChiService().getNext(
+            user.getToken(), user.getUserId(), adapter.getLastId(), dialog.getDialogId()
+        ).enqueue(
+            new Callback<MessagesResponse>() {
+                @Override
+                public void onResponse(Call<MessagesResponse> call, Response<MessagesResponse> response) {
+                    if (response.body() != null ){
+                        if (response.body().isSuccess()){
+                            adapter.addAll(response.body().getData());
+                            adapter.notifyDataSetChanged();
                         }else{
-                            Toast.makeText(DialogActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DialogActivity.this, response.body().getErrorText(), Toast.LENGTH_SHORT).show();
                         }
-                    }
-
-                    @Override
-                    public void onFailure(Call<MessagesResponse> call, Throwable t) {
+                    }else{
                         Toast.makeText(DialogActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     }
                 }
+
+                @Override
+                public void onFailure(Call<MessagesResponse> call, Throwable t) {
+                    Toast.makeText(DialogActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                }
+            }
         );
     }
 

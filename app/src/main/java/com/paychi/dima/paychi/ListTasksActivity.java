@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.paychi.dima.paychi.models.TaskList;
 import com.paychi.dima.paychi.models.TaskListWrapper;
+import com.paychi.dima.paychi.models.User;
 
 import java.util.ArrayList;
 
@@ -18,16 +19,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ListTasksActivity extends AppCompatActivity implements OnTaskListClickListener{
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_tasks);
 
-        String token = "2580123";
-        long userId = 6;
+        user = User.getInstance();
 
-        Call<TaskListResponse> callback = RestApiClient.getInstance().getPayChiService().getTaskListChildren(token, userId);
+        Call<TaskListResponse> callback = RestApiClient.getInstance().getPayChiService().getTaskListChildren(
+            user.getToken(), user.getUserId()
+        );
         callback.enqueue(new Callback<TaskListResponse>() {
             @Override
             public void onResponse(Call<TaskListResponse> call, Response<TaskListResponse> response) {

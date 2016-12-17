@@ -34,6 +34,10 @@
         </activity>
         <activity android:name=".ListTasksActivity">
         </activity>
+        <activity android:name=".KuSu.DialogsActivity">
+        </activity>
+        <activity android:name=".KuSu.DialogActivity">
+        </activity>
     </application>
 
 </manifest>

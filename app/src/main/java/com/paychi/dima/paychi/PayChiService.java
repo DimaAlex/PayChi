@@ -55,7 +55,7 @@ public interface PayChiService {
     Call<UsersResponse> getDialogsUsers(
             @Header(value = "token") String token,
             @Header(value = "user_id") long userId,
-            @Path("{dialog_id}") long dialogId
+            @Path("dialog_id") long dialogId
     );
 
     @GET("dialog/getAll")
@@ -68,14 +68,14 @@ public interface PayChiService {
     Call<MessagesResponse> getFirst(
             @Header(value = "token") String token,
             @Header(value = "user_id") long userId,
-            @Path("{dialog_id}") long dialogId
+            @Path("dialog_id") long dialogId
     );
 
     @DELETE("dialog/out/{dialog_id}")
     Call<EmptyResponse> outDialog(
             @Header(value = "token") String token,
             @Header(value = "user_id") long userId,
-            @Path("{dialog_id}") long dialogId
+            @Path("dialog_id") long dialogId
     );
 
     @GET("message/getNext/{dialog_id}")
@@ -83,7 +83,7 @@ public interface PayChiService {
             @Header(value = "token") String token,
             @Header(value = "user_id") long userId,
             @Query(value = "message_id") long messageId,
-            @Path("{dialog_id}") long dialogId
+            @Path("dialog_id") long dialogId
     );
 
     @POST("message/create")

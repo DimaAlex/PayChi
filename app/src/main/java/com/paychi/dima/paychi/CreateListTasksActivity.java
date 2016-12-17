@@ -11,6 +11,7 @@ import android.widget.RadioGroup;
 
 import com.paychi.dima.paychi.models.TaskList;
 import com.paychi.dima.paychi.models.TaskListWrapper;
+import com.paychi.dima.paychi.models.User;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CreateListTasksActivity extends AppCompatActivity {
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +39,12 @@ public class CreateListTasksActivity extends AppCompatActivity {
         RadioButton visibilityRB = (RadioButton) findViewById(visibilityRG.getCheckedRadioButtonId());
         long visibility = getVisibilityByValue(visibilityRB.getText().toString());
 
-        String token = "2580123";
-        long userId = 6;
+        user = User.getInstance();
+        TaskList taskList = new TaskList(user.getName(), user.getUserId(), visibility, desc);
 
-        TaskList taskList = new TaskList(name, userId, visibility,desc);
-
-        Call<TasksListItemResponse> callback = RestApiClient.getInstance().getPayChiService().createTaskList(token, userId, taskList);
+        Call<TasksListItemResponse> callback = RestApiClient.getInstance().getPayChiService().createTaskList(
+            user.getToken(), user.getUserId(), taskList
+        );
         callback.enqueue(new Callback<TasksListItemResponse>() {
             @Override
             public void onResponse(Call<TasksListItemResponse> call, Response<TasksListItemResponse> response) {

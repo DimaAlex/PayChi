@@ -22,10 +22,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by KuSu on 15.12.2016.
- */
-
 public class DialogsActivity extends Activity implements AdapterView.OnItemClickListener {
 
     User user;
