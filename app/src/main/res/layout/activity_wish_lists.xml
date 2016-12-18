@@ -2,11 +2,11 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_list_tasks"
+    android:id="@+id/activity_wish_lists"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.paychi.dima.paychi.ListTasksActivity">
+    tools:context="com.paychi.dima.paychi.WishListsActivity">
 
     <Button
         android:id="@+id/btn_addTasksList"
@@ -19,10 +19,10 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Список списков задач">
+        android:text="Список списков подарков">
     </TextView>
     <ListView
-        android:id="@+id/lvListTasks"
+        android:id="@+id/lvWishList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>

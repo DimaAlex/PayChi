@@ -4,19 +4,19 @@ import com.google.gson.annotations.SerializedName;
 
 public class TaskList {
     @SerializedName("listId")
-    public long listId;
+    private long listId;
 
     @SerializedName("userId")
-    public long userId;
+    private long userId;
 
     @SerializedName("visibility")
-    public long visibility;
+    private long visibility;
 
     @SerializedName("name")
-    public String name;
+    private String name;
 
     @SerializedName("description")
-    public String description;
+    private String description;
 
     public TaskList(String name, long userId, long visibility, String  desc) {
         this.name = name;
@@ -27,5 +27,9 @@ public class TaskList {
 
     public String getName() {
         return name;
+    }
+
+    public Long getListId() {
+        return listId;
     }
 }

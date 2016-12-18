@@ -58,4 +58,9 @@ public class MainActivity extends AppCompatActivity {
         dialogs.putExtra(Constants.USER_DATA, user);
         startActivity(dialogs);
     }
+
+    public void toWishListsActivity(View v) {
+        Intent wl = new Intent(this, WishListsActivity.class);
+        startActivity(wl);
+    }
 }

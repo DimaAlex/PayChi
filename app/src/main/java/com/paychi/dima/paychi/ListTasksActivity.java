@@ -28,7 +28,7 @@ public class ListTasksActivity extends AppCompatActivity implements OnTaskListCl
 
         user = User.getInstance();
 
-        Call<TaskListResponse> callback = RestApiClient.getInstance().getPayChiService().getTaskListChildren(
+        Call<TaskListResponse> callback = RestApiClient.getInstance().getPayChiService().getTaskList(
             user.getToken(), user.getUserId()
         );
         callback.enqueue(new Callback<TaskListResponse>() {
@@ -48,7 +48,7 @@ public class ListTasksActivity extends AppCompatActivity implements OnTaskListCl
 
     @Override
     public void onTaskListClick(TaskList list) {
-        Toast.makeText(this, String.valueOf(list.listId), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, String.valueOf(list.getListId()), Toast.LENGTH_SHORT).show();
     }
 
     public void toCreateListTasksActivity(View v) {

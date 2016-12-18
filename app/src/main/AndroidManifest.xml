@@ -38,6 +38,8 @@
         </activity>
         <activity android:name=".KuSu.DialogActivity">
         </activity>
+        <activity android:name=".WishListsActivity">
+        </activity>
     </application>
 
 </manifest>

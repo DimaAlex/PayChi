@@ -39,14 +39,14 @@ public interface PayChiService {
         @Body TaskList taskList
     );
 
-    @GET("tasklist/get") // список списков тасок глазами родителя
-    Call<TaskListResponse> getTaskListChildren(
+    @GET("tasklist/get") // список списков тасок
+    Call<TaskListResponse> getTaskList(
         @Header(value = "token") String token,
         @Header(value = "user_id") long userId
     );
 
-    @GET("tasklist/getParents") // список списков тасок глазами ребенка
-    Call<TaskListResponse> getTaskListParents(
+    @GET("wishlist/get") // список списков подарков
+    Call<WishListResponse> getWishList(
         @Header(value = "token") String token,
         @Header(value = "user_id") long userId
     );
