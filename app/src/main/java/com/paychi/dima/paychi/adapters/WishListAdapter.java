@@ -1,4 +1,4 @@
-package com.paychi.dima.paychi;
+package com.paychi.dima.paychi.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.paychi.dima.paychi.listeners.OnWishListClickListener;
 import com.paychi.dima.paychi.models.WishList;
 import com.paychi.dima.paychi.models.WishListWrapper;
 

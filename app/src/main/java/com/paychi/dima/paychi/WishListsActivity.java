@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.paychi.dima.paychi.models.TaskList;
+import com.paychi.dima.paychi.adapters.WishListAdapter;
+import com.paychi.dima.paychi.listeners.OnWishListClickListener;
 import com.paychi.dima.paychi.models.User;
 import com.paychi.dima.paychi.models.WishList;
 import com.paychi.dima.paychi.models.WishListWrapper;
+import com.paychi.dima.paychi.responses.WishListResponse;
 
 import java.util.ArrayList;
 
@@ -32,7 +34,7 @@ public class WishListsActivity extends AppCompatActivity implements OnWishListCl
         callback.enqueue(new Callback<WishListResponse>() {
             @Override
             public void onResponse(Call<WishListResponse> call, Response<WishListResponse> response) {
-                ArrayList<WishListWrapper> wishLists = response.body().data;
+                ArrayList<WishListWrapper> wishLists = response.body().getData();
                 ListView lvWishList = (ListView) findViewById(R.id.lvWishList);
                 lvWishList.setAdapter(new WishListAdapter(WishListsActivity.this, wishLists, WishListsActivity.this));
             }

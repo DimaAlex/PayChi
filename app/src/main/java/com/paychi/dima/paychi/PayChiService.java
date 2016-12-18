@@ -7,6 +7,10 @@ import com.paychi.dima.paychi.KuSu.reaponse.EmptyResponse;
 import com.paychi.dima.paychi.KuSu.reaponse.UsersResponse;
 import com.paychi.dima.paychi.models.TaskItem;
 import com.paychi.dima.paychi.models.TaskList;
+import com.paychi.dima.paychi.responses.TaskListResponse;
+import com.paychi.dima.paychi.responses.TasksListItemResponse;
+import com.paychi.dima.paychi.responses.UserResponse;
+import com.paychi.dima.paychi.responses.WishListResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

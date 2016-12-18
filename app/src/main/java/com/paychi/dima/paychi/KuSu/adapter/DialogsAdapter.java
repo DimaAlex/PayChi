@@ -1,21 +1,14 @@
 package com.paychi.dima.paychi.KuSu.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.paychi.dima.paychi.KuSu.models.Dialog;
-import com.paychi.dima.paychi.OnTaskListClickListener;
 import com.paychi.dima.paychi.R;
-import com.paychi.dima.paychi.models.TaskList;
-import com.paychi.dima.paychi.models.TaskListWrapper;
 
 import java.util.List;
 

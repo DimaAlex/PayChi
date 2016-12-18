@@ -4,13 +4,15 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.paychi.dima.paychi.adapters.ListTasksAdapter;
+import com.paychi.dima.paychi.listeners.OnTaskListClickListener;
 import com.paychi.dima.paychi.models.TaskList;
 import com.paychi.dima.paychi.models.TaskListWrapper;
 import com.paychi.dima.paychi.models.User;
+import com.paychi.dima.paychi.responses.TaskListResponse;
 
 import java.util.ArrayList;
 
@@ -18,7 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListTasksActivity extends AppCompatActivity implements OnTaskListClickListener{
+public class ListTasksActivity extends AppCompatActivity implements OnTaskListClickListener {
     User user;
 
     @Override
@@ -34,7 +36,7 @@ public class ListTasksActivity extends AppCompatActivity implements OnTaskListCl
         callback.enqueue(new Callback<TaskListResponse>() {
             @Override
             public void onResponse(Call<TaskListResponse> call, Response<TaskListResponse> response) {
-                ArrayList<TaskListWrapper> taskLists = response.body().data;
+                ArrayList<TaskListWrapper> taskLists = response.body().getData();
                 ListView lvListTasks = (ListView) findViewById(R.id.lvListTasks);
                 lvListTasks.setAdapter(new ListTasksAdapter(ListTasksActivity.this, taskLists, ListTasksActivity.this));
             }

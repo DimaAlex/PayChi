@@ -1,4 +1,4 @@
-package com.paychi.dima.paychi;
+package com.paychi.dima.paychi.responses;
 
 import com.paychi.dima.paychi.models.TaskList;
 
