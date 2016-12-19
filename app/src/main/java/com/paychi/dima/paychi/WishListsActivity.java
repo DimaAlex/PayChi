@@ -1,7 +1,9 @@
 package com.paychi.dima.paychi;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -49,5 +51,10 @@ public class WishListsActivity extends AppCompatActivity implements OnWishListCl
     @Override
     public void onWishListClick(WishList list) {
         Toast.makeText(this, String.valueOf(list.getListId()), Toast.LENGTH_SHORT).show();
+    }
+
+    public void toCreateWishListActivity(View v) {
+        Intent intObj = new Intent(this, CreateWishListActivity.class);
+        startActivity(intObj);
     }
 }

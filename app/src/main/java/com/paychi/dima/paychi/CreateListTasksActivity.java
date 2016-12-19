@@ -9,7 +9,7 @@ import android.widget.RadioGroup;
 
 import com.paychi.dima.paychi.models.TaskList;
 import com.paychi.dima.paychi.models.User;
-import com.paychi.dima.paychi.responses.TasksListItemResponse;
+import com.paychi.dima.paychi.responses.CreateTasksListResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,17 +38,17 @@ public class CreateListTasksActivity extends AppCompatActivity {
         user = User.getInstance();
         TaskList taskList = new TaskList(user.getName(), user.getUserId(), visibility, desc);
 
-        Call<TasksListItemResponse> callback = RestApiClient.getInstance().getPayChiService().createTaskList(
+        Call<CreateTasksListResponse> callback = RestApiClient.getInstance().getPayChiService().createTaskList(
             user.getToken(), user.getUserId(), taskList
         );
-        callback.enqueue(new Callback<TasksListItemResponse>() {
+        callback.enqueue(new Callback<CreateTasksListResponse>() {
             @Override
-            public void onResponse(Call<TasksListItemResponse> call, Response<TasksListItemResponse> response) {
+            public void onResponse(Call<CreateTasksListResponse> call, Response<CreateTasksListResponse> response) {
 
             }
 
             @Override
-            public void onFailure(Call<TasksListItemResponse> call, Throwable t) {
+            public void onFailure(Call<CreateTasksListResponse> call, Throwable t) {
 
             }
         });

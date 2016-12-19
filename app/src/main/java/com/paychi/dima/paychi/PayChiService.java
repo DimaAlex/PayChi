@@ -5,10 +5,11 @@ import com.paychi.dima.paychi.KuSu.reaponse.DialogsResponse;
 import com.paychi.dima.paychi.KuSu.reaponse.MessagesResponse;
 import com.paychi.dima.paychi.KuSu.reaponse.EmptyResponse;
 import com.paychi.dima.paychi.KuSu.reaponse.UsersResponse;
-import com.paychi.dima.paychi.models.TaskItem;
 import com.paychi.dima.paychi.models.TaskList;
+import com.paychi.dima.paychi.models.WishList;
+import com.paychi.dima.paychi.responses.CreateWishListResponse;
 import com.paychi.dima.paychi.responses.TaskListResponse;
-import com.paychi.dima.paychi.responses.TasksListItemResponse;
+import com.paychi.dima.paychi.responses.CreateTasksListResponse;
 import com.paychi.dima.paychi.responses.UserResponse;
 import com.paychi.dima.paychi.responses.WishListResponse;
 
@@ -29,15 +30,8 @@ public interface PayChiService {
         @Query(value = "type") int type
     );
 
-    @POST("taskitem/create")
-    Call<TaskItem> createTask(
-        @Header(value = "token") String token,
-        @Header(value = "user_id") long userId,
-        @Body TaskItem taskItem
-    );
-
     @POST("tasklist/create")
-    Call<TasksListItemResponse> createTaskList(
+    Call<CreateTasksListResponse> createTaskList(
         @Header(value = "token") String token,
         @Header(value = "user_id") long userId,
         @Body TaskList taskList
@@ -53,6 +47,13 @@ public interface PayChiService {
     Call<WishListResponse> getWishList(
         @Header(value = "token") String token,
         @Header(value = "user_id") long userId
+    );
+
+    @POST("wishlist/create")
+    Call<CreateWishListResponse> createWishList(
+        @Header(value = "token") String token,
+        @Header(value = "user_id") long userId,
+        @Body WishList wishList
     );
 
     @GET("dialog/getAll/{dialog_id}")

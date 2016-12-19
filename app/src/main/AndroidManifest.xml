@@ -40,6 +40,8 @@
         </activity>
         <activity android:name=".WishListsActivity">
         </activity>
+        <activity android:name=".CreateWishListActivity">
+        </activity>
     </application>
 
 </manifest>
