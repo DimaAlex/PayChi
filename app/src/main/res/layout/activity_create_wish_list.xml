@@ -29,21 +29,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_description">
         <RadioButton
-            android:id="@+id/rb_all"
+            android:id="@+id/rb_public"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Все" />
+            android:text="Публичный" />
         <RadioButton
-            android:id="@+id/rb_nobody"
+            android:id="@+id/rb_private"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Никто"/>
-        <RadioButton
-            android:id="@+id/rb_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Выбрать"/>
+            android:text="Приватный"/>
     </RadioGroup>
 
     <LinearLayout
@@ -58,9 +53,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="сreateListTasks"
+            android:onClick="сreateWishList"
             android:text="Создать">
         </Button>
     </LinearLayout>
-
 </LinearLayout>

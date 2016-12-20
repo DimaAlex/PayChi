@@ -12,7 +12,6 @@ import com.paychi.dima.paychi.KuSu.DialogsActivity;
 import com.paychi.dima.paychi.models.User;
 
 public class MainActivity extends AppCompatActivity {
-
     User user;
 
     @Override
@@ -22,9 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String token = "2580123";
-        long userId = 6;
-        user = new User(userId, token);
+        user = User.getInstance();
     }
 
     @Override

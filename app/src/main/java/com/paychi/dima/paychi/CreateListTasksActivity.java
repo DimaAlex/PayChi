@@ -36,7 +36,7 @@ public class CreateListTasksActivity extends AppCompatActivity {
         long visibility = getVisibilityByValue(visibilityRB.getText().toString());
 
         user = User.getInstance();
-        TaskList taskList = new TaskList(user.getName(), user.getUserId(), visibility, desc);
+        TaskList taskList = new TaskList(name, user.getUserId(), visibility, desc);
 
         Call<CreateTasksListResponse> callback = RestApiClient.getInstance().getPayChiService().createTaskList(
             user.getToken(), user.getUserId(), taskList

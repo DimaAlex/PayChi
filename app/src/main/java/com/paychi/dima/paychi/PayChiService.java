@@ -12,6 +12,9 @@ import com.paychi.dima.paychi.responses.TaskListResponse;
 import com.paychi.dima.paychi.responses.CreateTasksListResponse;
 import com.paychi.dima.paychi.responses.UserResponse;
 import com.paychi.dima.paychi.responses.WishListResponse;
+import com.paychi.dima.paychi.responses.getUsersResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -42,6 +45,14 @@ public interface PayChiService {
         @Header(value = "token") String token,
         @Header(value = "user_id") long userId
     );
+
+//    @POST("tasklist/permission/{tasklist_id}")
+//    Call<> changeTasklistPermission(
+//        @Header(value = "token") String token,
+//        @Path("tasklist_id") long taskListId,
+//        @Header(value = "user_id") long userId,
+//        @Body List<Long> gIds
+//        );
 
     @GET("wishlist/get") // список списков подарков
     Call<WishListResponse> getWishList(
@@ -97,4 +108,10 @@ public interface PayChiService {
             @Header(value = "user_id") long userId,
             @Body Message message
             );
+
+    @GET("request/accepted")
+    Call<getUsersResponse> getUsers(
+        @Header(value = "token") String token,
+        @Header(value = "user_id") long userId
+    );
 }
