@@ -12,7 +12,7 @@
         android:id="@+id/btn_addTaskItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick=""
+        android:onClick="toCreateTaskActivity"
         android:text="Добавить задачу">
     </Button>
 

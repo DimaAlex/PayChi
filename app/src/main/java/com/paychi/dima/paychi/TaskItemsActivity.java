@@ -22,6 +22,7 @@ import retrofit2.Response;
 
 public class TaskItemsActivity extends AppCompatActivity implements OnTaskItemClickListener {
     User user;
+    long tasklistId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class TaskItemsActivity extends AppCompatActivity implements OnTaskItemCl
         setContentView(R.layout.activity_task_items);
 
         user = User.getInstance();
-        long tasklistId = (long) getIntent().getSerializableExtra("tasklistId");
+        tasklistId = (long) getIntent().getSerializableExtra("tasklistId");
 
         Call<GetTaskItemsResponse> callback = RestApiClient.getInstance().getPayChiService().getTaskItems(
             user.getToken(), user.getUserId(), tasklistId
@@ -56,6 +57,7 @@ public class TaskItemsActivity extends AppCompatActivity implements OnTaskItemCl
 
     public void toCreateTaskActivity(View v) {
         Intent intObj = new Intent(this, CreateTaskActivity.class);
+        intObj.putExtra("tasklistId", tasklistId);
         startActivity(intObj);
     }
 }

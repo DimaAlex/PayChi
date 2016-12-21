@@ -8,6 +8,7 @@ import com.paychi.dima.paychi.KuSu.reaponse.UsersResponse;
 import com.paychi.dima.paychi.models.TaskItem;
 import com.paychi.dima.paychi.models.TaskList;
 import com.paychi.dima.paychi.models.WishList;
+import com.paychi.dima.paychi.responses.CreateTaskItemResponse;
 import com.paychi.dima.paychi.responses.CreateWishListResponse;
 import com.paychi.dima.paychi.responses.GetTaskItemsResponse;
 import com.paychi.dima.paychi.responses.TaskListResponse;
@@ -43,7 +44,7 @@ public interface PayChiService {
     );
 
     @POST("taskitem/create")
-    Call<CreateTasksListResponse> createTaskItem(
+    Call<CreateTaskItemResponse> createTaskItem(
         @Header(value = "token") String token,
         @Header(value = "user_id") long userId,
         @Body TaskItem taskItem

@@ -7,7 +7,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.paychi.dima.paychi.models.TaskItem;
 import com.paychi.dima.paychi.models.User;
+import com.paychi.dima.paychi.responses.CreateTaskItemResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,36 +25,40 @@ public class CreateTaskActivity extends AppCompatActivity {
     }
 
     protected void сreateTaskItem(View v) {
-        EditText nameInput = (EditText) findViewById(R.id.et_name);
-        String name = nameInput.getText().toString();
+        EditText titleInput = (EditText) findViewById(R.id.et_title);
+        String title = titleInput.getText().toString();
 
         EditText descInput = (EditText) findViewById(R.id.et_description);
         String desc = descInput.getText().toString();
 
-        RadioGroup visibilityRG = (RadioGroup) findViewById(R.id.rg_visibility);
-        RadioButton visibilityRB = (RadioButton) findViewById(visibilityRG.getCheckedRadioButtonId());
-        long visibility = getVisibilityByValue(visibilityRB.getText().toString());
+        EditText costInput = (EditText) findViewById(R.id.et_cost);
+        String cost = costInput.getText().toString();
+
+        RadioGroup targetRG = (RadioGroup) findViewById(R.id.rg_target);
+        RadioButton targetRB = (RadioButton) findViewById(targetRG.getCheckedRadioButtonId());
+        int target = getTargetByValue(targetRB.getText().toString());
 
         user = User.getInstance();
-//        TaskList taskList = new TaskList(name, user.getUserId(), visibility, desc);
-//
-//        Call<CreateTasksListResponse> callback = RestApiClient.getInstance().getPayChiService().createTaskList(
-//            user.getToken(), user.getUserId(), taskList
-//        );
-//        callback.enqueue(new Callback<>() {
-//            @Override
-//            public void onResponse(Call<CreateTasksListResponse> call, Response<CreateTasksListResponse> response) {
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<CreateTasksListResponse> call, Throwable t) {
-//
-//            }
-//        });
+        long tasklistId = (long) getIntent().getSerializableExtra("tasklistId");
+        TaskItem task = new TaskItem(title, desc, cost, tasklistId, 1, target);
+
+        Call<CreateTaskItemResponse> callback = RestApiClient.getInstance().getPayChiService().createTaskItem(
+            user.getToken(), user.getUserId(), task
+        );
+        callback.enqueue(new Callback<CreateTaskItemResponse>() {
+            @Override
+            public void onResponse(Call<CreateTaskItemResponse> call, Response<CreateTaskItemResponse> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<CreateTaskItemResponse> call, Throwable t) {
+
+            }
+        });
     }
 
-    private int getVisibilityByValue(String value) {
+    private int getTargetByValue(String value) {
         switch (value) {
             case "Публичный":
                 return 1;
