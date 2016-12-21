@@ -8,5 +8,13 @@ public class TaskItem {
     private long listId;
     private int state;
     private int target;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public long getItemId() {
+        return itemId;
+    }
 }
 

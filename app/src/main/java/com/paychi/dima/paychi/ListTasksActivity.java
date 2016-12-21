@@ -50,7 +50,11 @@ public class ListTasksActivity extends AppCompatActivity implements OnTaskListCl
 
     @Override
     public void onTaskListClick(TaskList list) {
-        Toast.makeText(this, String.valueOf(list.getListId()), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, String.valueOf(list.getListId()), Toast.LENGTH_SHORT).show();
+
+        Intent intObj = new Intent(this, TaskItemsActivity.class);
+        intObj.putExtra("tasklistId", list.getListId());
+        startActivity(intObj);
     }
 
     public void toCreateListTasksActivity(View v) {
