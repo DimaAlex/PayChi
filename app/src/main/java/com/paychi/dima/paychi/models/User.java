@@ -24,8 +24,8 @@ public class User implements Serializable{
     }
 
     public static User getInstance() {
-        String token = "2580123";
-        long userId = 6;
+        String token = "2636633";
+        long userId = 7;
         long type = 1;
 
         if (instance == null) {

@@ -7,10 +7,13 @@ import com.paychi.dima.paychi.KuSu.reaponse.EmptyResponse;
 import com.paychi.dima.paychi.KuSu.reaponse.UsersResponse;
 import com.paychi.dima.paychi.models.TaskItem;
 import com.paychi.dima.paychi.models.TaskList;
+import com.paychi.dima.paychi.models.WishItem;
 import com.paychi.dima.paychi.models.WishList;
 import com.paychi.dima.paychi.responses.CreateTaskItemResponse;
+import com.paychi.dima.paychi.responses.CreateWishItemResponse;
 import com.paychi.dima.paychi.responses.CreateWishListResponse;
 import com.paychi.dima.paychi.responses.GetTaskItemsResponse;
+import com.paychi.dima.paychi.responses.GetWishItemsResponse;
 import com.paychi.dima.paychi.responses.TaskListResponse;
 import com.paychi.dima.paychi.responses.CreateTasksListResponse;
 import com.paychi.dima.paychi.responses.UserResponse;
@@ -70,6 +73,21 @@ public interface PayChiService {
 //        @Header(value = "user_id") long userId,
 //        @Body List<Long> gIds
 //        );
+
+    @GET("wishitem/get/{wishlist_id}")
+    Call<GetWishItemsResponse> getWishItems(
+        @Header(value = "token") String token,
+        @Header(value = "user_id") long userId,
+        @Path("wishlist_id") long wishListId
+    );
+
+    @POST("wishitem/create/{wishlist_id}")
+    Call<CreateWishItemResponse> createWishItem(
+        @Header(value = "token") String token,
+        @Header(value = "user_id") long userId,
+        @Body WishItem wishItem,
+        @Path("wishlist_id") long wishListId
+    );
 
     @GET("wishlist/get") // список списков подарков
     Call<WishListResponse> getWishList(

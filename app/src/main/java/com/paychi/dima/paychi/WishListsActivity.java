@@ -50,7 +50,9 @@ public class WishListsActivity extends AppCompatActivity implements OnWishListCl
 
     @Override
     public void onWishListClick(WishList list) {
-        Toast.makeText(this, String.valueOf(list.getListId()), Toast.LENGTH_SHORT).show();
+        Intent intObj = new Intent(this, WishItemsActivity.class);
+        intObj.putExtra("wishlistId", list.getListId());
+        startActivity(intObj);
     }
 
     public void toCreateWishListActivity(View v) {

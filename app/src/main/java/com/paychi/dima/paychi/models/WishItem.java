@@ -11,6 +11,16 @@ public class WishItem {
     private long visibility;
     private long listId;
 
+    public WishItem(String title, String comment, String link, long cost, long wantRate, long visibility, long listId) {
+        this.title = title;
+        this.comment = comment;
+        this.link = link;
+        this.cost = cost;
+        this.wantRate = wantRate;
+        this.visibility = visibility;
+        this.listId = listId;
+    }
+
     public Long getItemId() {
         return itemId;
     }

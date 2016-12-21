@@ -44,6 +44,8 @@
         </activity>
         <activity android:name=".TaskItemsActivity">
         </activity>
+        <activity android:name=".WishItemsActivity">
+        </activity>
     </application>
 
 </manifest>
