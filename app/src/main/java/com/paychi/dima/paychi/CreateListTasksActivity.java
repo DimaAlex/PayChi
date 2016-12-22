@@ -4,12 +4,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.paychi.dima.paychi.adapters.UserListAdapter;
 import com.paychi.dima.paychi.models.TaskList;
 import com.paychi.dima.paychi.models.User;
 import com.paychi.dima.paychi.responses.CreateTasksListResponse;
+import com.paychi.dima.paychi.responses.getUsersResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,11 +22,42 @@ import retrofit2.Response;
 
 public class CreateListTasksActivity extends AppCompatActivity {
     User user;
+    List<User> users;
+    UserListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_list_tasks);
+
+        Call<getUsersResponse> callback = RestApiClient.getInstance().getPayChiService().getUsers(
+            user.getToken(), user.getUserId()
+        );
+        callback.enqueue(new Callback<getUsersResponse>() {
+            @Override
+            public void onResponse(Call<getUsersResponse> call, Response<getUsersResponse> response) {
+                users = response.body().getData();
+            }
+
+            @Override
+            public void onFailure(Call<getUsersResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void initList(List<User> usrs) {
+        ListView lvUserList = (ListView) findViewById(R.id.lv_user_list);
+        lvUserList.setVisibility(View.VISIBLE);
+        adapter = new UserListAdapter(this, usrs);
+        lvUserList.setAdapter(adapter);
+    }
+
+    public void deInitList() {
+        ListView lvUserList = (ListView) findViewById(R.id.lv_user_list);
+        lvUserList.setVisibility(View.GONE);
+        adapter = null;
+        lvUserList.setAdapter(null);
     }
 
     protected void сreateListTasks(View v) {
@@ -52,6 +88,14 @@ public class CreateListTasksActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    protected void OnRBChooseClick(View v) {
+        initList(users);
+    }
+
+    protected void OnRBAllOrNobodyClick(View v) {
+        deInitList();
     }
 
     private int getVisibilityByValue(String value) {

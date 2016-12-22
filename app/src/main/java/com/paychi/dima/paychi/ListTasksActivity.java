@@ -49,9 +49,9 @@ public class ListTasksActivity extends AppCompatActivity implements OnTaskListCl
     }
 
     @Override
-    public void onTaskListClick(TaskList list) {
+    public void onTaskListClick(TaskListWrapper listWrapper) {
         Intent intObj = new Intent(this, TaskItemsActivity.class);
-        intObj.putExtra("tasklistId", list.getListId());
+        intObj.putExtra("tasklistId", listWrapper.getList().getListId());
         startActivity(intObj);
     }
 

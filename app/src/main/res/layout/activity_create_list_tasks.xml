@@ -32,18 +32,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
+            android:onClick="OnRBAllOrNobodyClick"
             android:text="Все" />
         <RadioButton
             android:id="@+id/rb_nobody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="OnRBAllOrNobodyClick"
             android:text="Никто"/>
         <RadioButton
             android:id="@+id/rb_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="OnRBChooseClick"
             android:text="Выбрать"/>
     </RadioGroup>
+
+    <ListView
+        android:id="@+id/lv_user_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="wrap_content"

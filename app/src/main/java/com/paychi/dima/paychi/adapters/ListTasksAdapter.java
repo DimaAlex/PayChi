@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.paychi.dima.paychi.R;
 import com.paychi.dima.paychi.listeners.OnTaskListClickListener;
 import com.paychi.dima.paychi.models.TaskList;
 import com.paychi.dima.paychi.models.TaskListWrapper;
@@ -50,19 +51,32 @@ public class ListTasksAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if(view == null)
-            view = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
-        TaskList list = getList(position).getList();
-        fillView(view, list);
+            view = inflater.inflate(R.layout.item_list_tasks, parent, false);
+        TaskListWrapper listWrapper = getList(position);
+        fillView(view, listWrapper);
         return view;
     }
 
-    private void fillView(View view, final TaskList list) {
-        TextView textView = (TextView) view.findViewById(android.R.id.text1);
-        textView.setText(list.getName());
+    private void fillView(View view, final TaskListWrapper listWrapper) {
+        TextView tvName = (TextView) view.findViewById(R.id.tv_name);
+        tvName.setText(listWrapper.getList().getName());
+
+        TextView tvInProgress = (TextView) view.findViewById(R.id.tv_in_progress);
+        tvInProgress.setText(String.format("В процессе - %d", listWrapper.getInProgress()));
+
+        TextView tvDone = (TextView) view.findViewById(R.id.tv_done);
+        tvDone.setText(String.format("Выполненных - %d", listWrapper.getDone()));
+
+        TextView tvPraised = (TextView) view.findViewById(R.id.tv_praised);
+        tvPraised.setText(String.format("Похваленных - %d", listWrapper.getPraised()));
+
+        TextView tvTotal = (TextView) view.findViewById(R.id.tv_total);
+        tvTotal.setText(String.format("Всего - %d", listWrapper.getTotal()));
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onTaskListClick(list);
+                listener.onTaskListClick(listWrapper);
             }
         });
     }

@@ -1,8 +1,8 @@
 package com.paychi.dima.paychi.listeners;
 
-import com.paychi.dima.paychi.models.TaskList;
+import com.paychi.dima.paychi.models.TaskListWrapper;
 
 public interface OnTaskListClickListener {
 
-    void onTaskListClick(TaskList list);
+    void onTaskListClick(TaskListWrapper list);
 }
