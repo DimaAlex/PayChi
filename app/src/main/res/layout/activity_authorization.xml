@@ -1,29 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_authorization"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    tools:context="com.paychi.dima.paychi.AuthorizationActivity">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/activity_authorization"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              tools:context="com.paychi.dima.paychi.AuthorizationActivity"
+              android:orientation="vertical">
 
     <Button
         android:id="@+id/btn_vk"
-        android:layout_width="wrap_content"
+        android:layout_width="142dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_weight="1"
         android:text="VK"
         android:onClick="onBtnVkClick"/>
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radio_group">
+        <RadioButton
+            android:text="Родитель"
+            android:layout_width="wrap_content"
+            android:id="@+id/radio_parent"
+            android:layout_height="wrap_content"/>
 
+        <RadioButton
+            android:text="Ребенок"
+            android:layout_width="97dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_child" />
+    </RadioGroup>
     <Button
         android:id="@+id/btn_fb"
-        android:layout_width="wrap_content"
+        android:layout_width="141dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_weight="1"
         android:text="Facebook" />
 
 </LinearLayout>

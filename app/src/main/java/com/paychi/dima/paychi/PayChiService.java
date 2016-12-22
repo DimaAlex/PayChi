@@ -39,6 +39,12 @@ public interface PayChiService {
         @Query(value = "type") int type
     );
 
+    @POST("user/loginVk/")
+    Call<UserResponse> getUser(
+        @Header(value = "token") String token,
+        @Header(value = "userId") long userId
+    );
+
     @GET("taskitem/get/{tasklist_id}")
     Call<GetTaskItemsResponse> getTaskItems(
         @Header(value = "token") String token,
