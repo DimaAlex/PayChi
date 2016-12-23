@@ -1,5 +1,6 @@
 package com.paychi.dima.paychi;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.paychi.dima.paychi.models.User;
 import com.paychi.dima.paychi.models.WishItem;
@@ -61,7 +63,15 @@ public class CreateWishActivity extends AppCompatActivity {
         callback.enqueue(new Callback<CreateWishItemResponse>() {
             @Override
             public void onResponse(Call<CreateWishItemResponse> call, Response<CreateWishItemResponse> response) {
-
+                CreateWishItemResponse body = response.body();
+                if (body.getErrorCode() == 0) {
+                    Intent intent = new Intent(CreateWishActivity.this, WishItemsActivity.class);
+                    intent.putExtra("wishlistId", body.getData().getListId());
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(CreateWishActivity.this, body.getErrorMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

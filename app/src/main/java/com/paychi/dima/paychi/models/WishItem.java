@@ -36,4 +36,8 @@ public class WishItem {
     public String getPhoto() {
         return photo;
     }
+
+    public Long getListId() {
+        return listId;
+    }
 }
