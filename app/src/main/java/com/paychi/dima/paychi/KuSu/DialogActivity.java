@@ -193,16 +193,19 @@ public class DialogActivity extends Activity implements View.OnClickListener {
                                 public void onResponse(Call<EmptyResponse> call, Response<EmptyResponse> response) {
                                     if (response.body() != null) {
                                         if (response.body().isSuccess()) {
+                                            progressBar.setVisibility(View.GONE);
                                         } else {
                                             Toast.makeText(DialogActivity.this, response.body().getErrorText(), Toast.LENGTH_SHORT).show();
                                         }
                                     } else {
+                                        progressBar.setVisibility(View.GONE);
                                         Toast.makeText(DialogActivity.this, "Error", Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
                                 @Override
                                 public void onFailure(Call<EmptyResponse> call, Throwable t) {
+                                    progressBar.setVisibility(View.GONE);
                                     Toast.makeText(DialogActivity.this, "Error", Toast.LENGTH_SHORT).show();
                                 }
                             });
