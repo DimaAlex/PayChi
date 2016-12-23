@@ -1,11 +1,13 @@
 package com.paychi.dima.paychi;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.paychi.dima.paychi.models.TaskItem;
 import com.paychi.dima.paychi.models.User;
@@ -48,7 +50,15 @@ public class CreateTaskActivity extends AppCompatActivity {
         callback.enqueue(new Callback<CreateTaskItemResponse>() {
             @Override
             public void onResponse(Call<CreateTaskItemResponse> call, Response<CreateTaskItemResponse> response) {
-
+                CreateTaskItemResponse body = response.body();
+                if (body.getErrorCode() == 0) {
+                    Intent intent = new Intent(CreateTaskActivity.this, TaskItemsActivity.class);
+                    intent.putExtra("tasklistId", body.getData().getListId());
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(CreateTaskActivity.this, body.getErrorMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

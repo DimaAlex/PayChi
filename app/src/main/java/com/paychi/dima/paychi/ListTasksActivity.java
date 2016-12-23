@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,6 +30,10 @@ public class ListTasksActivity extends AppCompatActivity implements OnTaskListCl
         setContentView(R.layout.activity_list_tasks);
 
         user = User.getInstance();
+        if (user.getType() == 2) {
+            Button btn = (Button) findViewById(R.id.btn_addTasksList);
+            btn.setVisibility(View.GONE);
+        }
 
         Call<TaskListResponse> callback = RestApiClient.getInstance().getPayChiService().getTaskList(
             user.getToken(), user.getUserId()

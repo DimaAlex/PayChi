@@ -6,7 +6,15 @@ import java.util.ArrayList;
 
 public class CreateTasksListResponse {
     String result;
-    ArrayList<TaskList> data;
-    int error_code; // 0 - success, another error message
-    String error_message;
+    TaskList data;
+    private int error_code; // 0 - success, another error message
+    private String error_message;
+
+    public int getErrorCode() {
+        return error_code;
+    }
+
+    public String getErrorMessage() {
+        return error_message;
+    }
 }

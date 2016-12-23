@@ -1,13 +1,23 @@
 package com.paychi.dima.paychi.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class User implements Serializable{
     private long userId;
     private String token;
+
+    @SerializedName("photo")
     private String photo;
+
+    @SerializedName("chatName")
     private String chatName;
+
+    @SerializedName("type")
     private long type;
+
+    @SerializedName("gId")
     private long gId;
 
     private static User instance;
@@ -27,9 +37,12 @@ public class User implements Serializable{
         String token = "2580123";
         long userId = 6;
         long type = 1;
+//        String token = "2636633";
+//        long userId = 7;
+//        long type = 2;
 
         if (instance == null) {
-            instance = new User(userId, token);
+            instance = new User(userId, token, type);
         }
 
         return instance;
@@ -49,5 +62,9 @@ public class User implements Serializable{
 
     public String getName() {
         return chatName;
+    }
+
+    public long getType() {
+        return type;
     }
 }

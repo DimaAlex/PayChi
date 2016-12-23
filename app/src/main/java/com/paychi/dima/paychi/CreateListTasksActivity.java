@@ -1,12 +1,15 @@
 package com.paychi.dima.paychi;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.paychi.dima.paychi.adapters.UserListAdapter;
 import com.paychi.dima.paychi.models.TaskList;
@@ -30,6 +33,7 @@ public class CreateListTasksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_list_tasks);
 
+        user = User.getInstance();
         Call<getUsersResponse> callback = RestApiClient.getInstance().getPayChiService().getUsers(
             user.getToken(), user.getUserId()
         );
@@ -80,7 +84,14 @@ public class CreateListTasksActivity extends AppCompatActivity {
         callback.enqueue(new Callback<CreateTasksListResponse>() {
             @Override
             public void onResponse(Call<CreateTasksListResponse> call, Response<CreateTasksListResponse> response) {
-
+                CreateTasksListResponse body = response.body();
+                if (body.getErrorCode() == 0) {
+                    Intent intent = new Intent(CreateListTasksActivity.this, ListTasksActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(CreateListTasksActivity.this, body.getErrorMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

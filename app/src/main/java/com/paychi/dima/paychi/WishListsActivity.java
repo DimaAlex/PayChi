@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,6 +30,10 @@ public class WishListsActivity extends AppCompatActivity implements OnWishListCl
         setContentView(R.layout.activity_wish_lists);
 
         user = User.getInstance();
+        if (user.getType() == 1) {
+            Button btn = (Button) findViewById(R.id.btn_addTasksList);
+            btn.setVisibility(View.GONE);
+        }
 
         Call<WishListResponse> callback = RestApiClient.getInstance().getPayChiService().getWishList(
             user.getToken(), user.getUserId()

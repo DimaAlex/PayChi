@@ -25,5 +25,9 @@ public class TaskItem {
     public long getItemId() {
         return itemId;
     }
+
+    public long getListId() {
+        return listId;
+    }
 }
 
